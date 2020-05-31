@@ -9,8 +9,11 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
 
+
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1/xxl_job?useSSL=false" userId="root" password="root"/>
+        connectionURL="jdbc:mysql://127.0.0.1/xxl_job?useSSL=false" userId="root" password="root"/>
+
+        <javaTypeResolver type="plugin.IntegerJavaTypeResolver"/>
 
         <javaModelGenerator targetPackage="example.model" targetProject="repository/mybatis-gen/src/main/java"/>
 
