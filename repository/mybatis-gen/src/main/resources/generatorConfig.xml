@@ -9,6 +9,10 @@
 
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
 
+        <plugin type="plugin.BaseMapperPlugin">
+            <property name="mappers" value="common.BaseMapper"/>
+        </plugin>
+
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true"/>
