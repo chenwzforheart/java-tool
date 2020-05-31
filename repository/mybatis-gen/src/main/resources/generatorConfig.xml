@@ -4,6 +4,8 @@
 <generatorConfiguration>
     <context id="simple" targetRuntime="MyBatis3Simple">
 
+        <plugin type="plugin.TableColumnPlugin"/>
+
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true"/>
@@ -11,7 +13,11 @@
 
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-        connectionURL="jdbc:mysql://127.0.0.1/xxl_job?useSSL=false" userId="root" password="root"/>
+        connectionURL="jdbc:mysql://127.0.0.1/xxl_job?characterEncoding=UTF-8&amp;useSSL=false" userId="root" password="root">
+            <!-- 配置获得表注释和字段注释 -->
+           <!-- <property name="remarks" value="true"/>-->
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
 
         <javaTypeResolver type="plugin.IntegerJavaTypeResolver"/>
 
