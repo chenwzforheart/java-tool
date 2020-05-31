@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @author csh9016
  * @date 2020/6/1
  */
 public class TableColumnPlugin extends PluginAdapter {

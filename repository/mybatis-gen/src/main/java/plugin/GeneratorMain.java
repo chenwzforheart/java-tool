@@ -1,4 +1,4 @@
-package com.cwzsmile.repository;
+package plugin;
 
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author csh9016
  * @date 2020/6/1
  * 文档链接 http://mybatis.org/generator/
  */

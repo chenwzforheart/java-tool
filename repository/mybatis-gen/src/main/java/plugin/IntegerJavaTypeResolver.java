@@ -6,7 +6,6 @@ import org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl;
 import java.sql.Types;
 
 /**
- * @author csh9016
  * @date 2020/6/1
  */
 public class IntegerJavaTypeResolver extends JavaTypeResolverDefaultImpl {
