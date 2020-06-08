@@ -13,6 +13,8 @@
             <property name="mappers" value="common.BaseMapper"/>
         </plugin>
 
+        <plugin type="plugin.RemovePlugin"/>
+
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true"/>
@@ -34,6 +36,12 @@
 
         <javaClientGenerator type="XMLMAPPER" targetPackage="example.mapper" targetProject="repository/mybatis-gen/src/main/java"/>
 
-        <table tableName="xxl_job_group" domainObjectName="XxlJobGroup" />
+
+        <table tableName="xxl_job_user" domainObjectName="XxlJobUser"
+               enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false"
+               enableInsert="false" enableUpdateByPrimaryKey="false"
+               enableDeleteByPrimaryKey="false"
+        ></table>
     </context>
 </generatorConfiguration>
