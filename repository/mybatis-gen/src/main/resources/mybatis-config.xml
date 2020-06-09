@@ -33,6 +33,7 @@
     </environments>
 
     <mappers>
+        <package name="common.mapper"/>
         <package name="example.mapper"/>
     </mappers>
 </configuration>

@@ -13,7 +13,16 @@ public class DateTableShardStrategy implements ITableShardStrategy {
 
     @Override
     public String tableShard(String tableName) {
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
-        return tableName + "_" + sdf.format(new Date());
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
+            if (ShardParamContext.get() != null) {
+                return tableName + "_" + sdf.format((Date) ShardParamContext.get());
+            }else {
+                return tableName + "_" + sdf.format(new Date());
+            }
+        }finally {
+            ShardParamContext.remove();
+        }
+
     }
 }

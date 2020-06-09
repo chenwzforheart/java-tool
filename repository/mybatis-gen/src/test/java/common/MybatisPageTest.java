@@ -13,6 +13,7 @@ import tk.mybatis.mapper.mapperhelper.MapperHelper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -51,17 +52,22 @@ public class MybatisPageTest {
     }
 
     @Test
-    public void page() throws IOException{
+    public void page() throws Exception{
         SqlSession session = getSqlSession();
         Page page = PageHelper.startPage(1, 10, true);
         XxlJobUser user = new XxlJobUser();
         user.setUsername("user1");
+        ShardParamContext.set("200610");
         List<XxlJobUser> result = session.selectList("example.mapper.XxlJobUserMapper.select", user);
         System.out.println(result.size());
     }
 
     @Test
-    public void divideTable() {
-
+    public void divideTable() throws IOException{
+        SqlSession session = getSqlSession();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("newTable", "xxl_job_user_20200609");
+        param.put("base", "xxl_job_user");
+        session.update("common.mapper.CommonMapper.createTableLike",param );
     }
 }
