@@ -2,6 +2,7 @@ package common;
 
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.reflection.DefaultReflectorFactory;
 import org.apache.ibatis.reflection.MetaObject;
@@ -10,6 +11,8 @@ import org.apache.ibatis.reflection.SystemMetaObject;
 
 import java.sql.Connection;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author csh9016
@@ -47,10 +50,28 @@ public class DivideTablePlugin implements Interceptor {
             // 获取源sql
             String sql = (String)metaObject.getValue("delegate.boundSql.sql");
             // 用新sql代替旧sql, 完成所谓的sql rewrite
-            metaObject.setValue("delegate.boundSql.sql", sql.replaceAll(tableName, newTableName));
+            if (mappedStatement.getSqlCommandType() == SqlCommandType.SELECT) {
+                String suffix = newTableName.replaceAll(tableName, "");
+                metaObject.setValue("delegate.boundSql.sql",selectSql(sql, suffix));
+            }else {
+                metaObject.setValue("delegate.boundSql.sql", sql.replaceAll(tableName, newTableName));
+            }
         }
-
         return invocation.proceed();
+    }
+
+    public static String selectSql(String sql,String suffix) {
+        Pattern p = Pattern.compile("(t_msg_[_a-zA-Z]*)",Pattern.CASE_INSENSITIVE);
+        StringBuffer sbf = new StringBuffer();
+        Matcher m = p.matcher(sql);
+        int index = 0;
+        while (m.find()) {
+            sbf.append(sql.substring(index, m.start()));
+            sbf.append(m.group() + suffix);
+            index = m.end();
+        }
+        sbf.append(sql.substring(index));
+        return sbf.toString();
     }
 
     @Override
