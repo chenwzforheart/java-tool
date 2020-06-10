@@ -44,8 +44,7 @@ public class DivideTablePlugin implements Interceptor {
         TableShard tableShard = (TableShard)clazz.getAnnotation(TableShard.class);
         if ( tableShard != null ) {
             String tableName = tableShard.tableName();
-            Class<? extends ITableShardStrategy> strategyClazz = tableShard.shardStrategy();
-            ITableShardStrategy strategy = strategyClazz.newInstance();
+            ITableShardStrategy strategy = TableShardStrategyCache.getStrategy(tableShard);
             String newTableName = strategy.tableShard(tableName);
             // 获取源sql
             String sql = (String)metaObject.getValue("delegate.boundSql.sql");

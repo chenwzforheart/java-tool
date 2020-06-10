@@ -2,6 +2,7 @@ package common;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import common.mapper.CommonMapper;
 import example.model.XxlJobUser;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -57,6 +58,9 @@ public class MybatisPageTest {
         Page page = PageHelper.startPage(1, 10, true);
         XxlJobUser user = new XxlJobUser();
         user.setUsername("user1");
+
+        TableShardStrategyCache.setCommonMapper(session.getMapper(CommonMapper.class));
+
         ShardParamContext.set("20031911111481261732");
         List<XxlJobUser> result = session.selectList("example.mapper.XxlJobUserMapper.select", user);
         System.out.println(result.size());
