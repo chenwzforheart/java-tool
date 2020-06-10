@@ -57,7 +57,7 @@ public class MybatisPageTest {
         Page page = PageHelper.startPage(1, 10, true);
         XxlJobUser user = new XxlJobUser();
         user.setUsername("user1");
-        ShardParamContext.set("200610");
+        ShardParamContext.set("20031911111481261732");
         List<XxlJobUser> result = session.selectList("example.mapper.XxlJobUserMapper.select", user);
         System.out.println(result.size());
     }

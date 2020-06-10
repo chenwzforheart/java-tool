@@ -61,7 +61,7 @@ public class DivideTablePlugin implements Interceptor {
     }
 
     public static String selectSql(String sql,String suffix) {
-        Pattern p = Pattern.compile("(t_msg_[_a-zA-Z]*)",Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile("(xxl_[_a-zA-Z]*)",Pattern.CASE_INSENSITIVE);
         StringBuffer sbf = new StringBuffer();
         Matcher m = p.matcher(sql);
         int index = 0;
